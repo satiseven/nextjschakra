@@ -16,7 +16,7 @@ interface RegisterProps {}
 const Register: React.FC<RegisterProps> = ({}) => {
   const [, register] = useMutation(`
   mutation Register($username:String!,$password:String!,$name:String!,$email:String!){
-    register(options:{name:$username,email:$email,username:$username,password:$password
+    register(options:{name:$name,email:$email,username:$username,password:$password
     }){
       errors{
         field
