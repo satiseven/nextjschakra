@@ -3,6 +3,7 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
+import NavBar from "../components/NavBar";
 import { Wrapper } from "../components/Wrapper";
 import { useLoginMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
@@ -14,6 +15,7 @@ const login = ({}: LoginProps) => {
   const [, login] = useLoginMutation();
   return (
     <div>
+      <NavBar />
       <Wrapper variant="small">
         <Formik
           initialValues={{ username: "", password: "" }}

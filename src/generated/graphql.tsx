@@ -146,6 +146,25 @@ export type RegisterMutation = (
   ) }
 );
 
+export type CheckLoginQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CheckLoginQuery = (
+  { __typename?: 'Query' }
+  & { checkLogin?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'name' | 'email' | 'username'>
+  )> }
+);
+
+export type HellQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HellQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'hell'>
+);
+
 
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
@@ -184,4 +203,26 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const CheckLoginDocument = gql`
+    query CheckLogin {
+  checkLogin {
+    name
+    email
+    username
+  }
+}
+    `;
+
+export function useCheckLoginQuery(options: Omit<Urql.UseQueryArgs<CheckLoginQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<CheckLoginQuery>({ query: CheckLoginDocument, ...options });
+};
+export const HellDocument = gql`
+    query Hell {
+  hell
+}
+    `;
+
+export function useHellQuery(options: Omit<Urql.UseQueryArgs<HellQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<HellQuery>({ query: HellDocument, ...options });
 };

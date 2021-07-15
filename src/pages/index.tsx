@@ -1,6 +1,8 @@
+import NavBar from "../components/NavBar";
+
 const Index = () => (
   <>
-    <p>asdasd</p>
+    <NavBar />
   </>
 );
 
