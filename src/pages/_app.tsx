@@ -39,6 +39,13 @@ const client = createClient({
                   return query;
                 } else {
                   //  return { checkLogin: result.login.user };
+                  return {
+                    checkLogin: {
+                      email: result.login.user.email,
+                      name: result.login.user.name,
+                      username: result.login.user.name,
+                    },
+                  };
                   //TODO
                 }
               }
@@ -50,7 +57,6 @@ const client = createClient({
     fetchExchange,
   ],
 });
-console.log(process.env.GRAPHQL_SERVER);
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider value={client}>
