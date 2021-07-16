@@ -1,11 +1,12 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import React from "react";
 import NextLink from "next/link";
-import { useCheckLoginQuery } from "../generated/graphql";
+import { useCheckLoginQuery, useLogoutMutation } from "../generated/graphql";
 interface NavBarProps {}
 
 const NavBar = ({}: NavBarProps) => {
   const [{ data, fetching }] = useCheckLoginQuery();
+  const [{ fetching: logoutFetching }, logout] = useLogoutMutation();
   let body = null;
   if (fetching) {
     body = "User is loading ";
@@ -23,7 +24,20 @@ const NavBar = ({}: NavBarProps) => {
       </div>
     );
   } else if (data?.checkLogin) {
-    body = <Box>{data?.checkLogin.email}</Box>;
+    body = (
+      <Flex>
+        <Box>{data?.checkLogin.email}</Box>
+        <Button
+          isLoading={logoutFetching}
+          variant="link"
+          colorScheme="red"
+          onClick={() => logout()}
+        >
+          {" "}
+          Logout
+        </Button>
+      </Flex>
+    );
   }
   return (
     <Flex bg="darkgoldenrod" p={4}>
