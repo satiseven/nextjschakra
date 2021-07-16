@@ -7,6 +7,7 @@ import {
   CheckLoginDocument,
   CheckLoginQuery,
   LoginMutation,
+  LogoutMutation,
   Query,
   useCheckLoginQuery,
 } from "../generated/graphql";
@@ -29,6 +30,14 @@ const client = createClient({
     cacheExchange({
       updates: {
         Mutation: {
+          logout: (_result: LoginMutation, args, cache, info) => {
+            betterUpdateQuery<LogoutMutation, CheckLoginQuery>(
+              cache,
+              { query: CheckLoginDocument },
+              _result,
+              () => ({ checkLogin: null })
+            );
+          },
           login: (_result: LoginMutation, args, cache, info) => {
             betterUpdateQuery<LoginMutation, CheckLoginQuery>(
               cache,
