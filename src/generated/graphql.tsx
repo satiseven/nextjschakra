@@ -179,6 +179,17 @@ export type HellQuery = (
   & Pick<Query, 'hell'>
 );
 
+export type PostsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PostsQuery = (
+  { __typename?: 'Query' }
+  & { posts: Array<(
+    { __typename?: 'Post' }
+    & Pick<Post, 'id' | 'title' | 'createdAt' | 'updatedAt'>
+  )> }
+);
+
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
@@ -254,4 +265,18 @@ export const HellDocument = gql`
 
 export function useHellQuery(options: Omit<Urql.UseQueryArgs<HellQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<HellQuery>({ query: HellDocument, ...options });
+};
+export const PostsDocument = gql`
+    query Posts {
+  posts {
+    id
+    title
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function usePostsQuery(options: Omit<Urql.UseQueryArgs<PostsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<PostsQuery>({ query: PostsDocument, ...options });
 };

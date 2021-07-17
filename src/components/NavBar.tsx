@@ -13,6 +13,11 @@ const NavBar = ({}: NavBarProps) => {
   } else if (!data?.checkLogin) {
     body = (
       <div>
+        <NextLink href="/posts">
+          <Link color="whatsapp.300" mr={2}>
+            Posts
+          </Link>
+        </NextLink>
         <NextLink href="/login">
           <Link color="whatsapp.300" mr={2}>
             Login
@@ -26,6 +31,11 @@ const NavBar = ({}: NavBarProps) => {
   } else if (data?.checkLogin) {
     body = (
       <Flex>
+        <NextLink href="/posts">
+          <Link color="whatsapp.300" mr={2}>
+            Posts
+          </Link>
+        </NextLink>
         <Box>{data?.checkLogin.email}</Box>
         <Button
           isLoading={logoutFetching}
@@ -41,6 +51,11 @@ const NavBar = ({}: NavBarProps) => {
   }
   return (
     <Flex bg="darkgoldenrod" p={4}>
+      <NextLink href="/posts">
+        <Link color="whatsapp.300" mr={2}>
+          Posts
+        </Link>
+      </NextLink>
       <Box ml={"auto"}>{body}</Box>
     </Flex>
   );
