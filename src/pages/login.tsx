@@ -54,5 +54,4 @@ const login = ({}: LoginProps) => {
     </div>
   );
 };
-
 export default withUrqlClient(createUrqlClient)(login);

@@ -12,13 +12,6 @@ mutation Register(
       password: $password
     }
   ) {
-    errors {
-      field
-      message
-    }
-    user {
-      email
-      id
-    }
+    ...RegularUserResponse
   }
 }
